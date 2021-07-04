@@ -6,7 +6,7 @@ class BaseConfig(object):
     # 设置URI地址
     SQLALCHEMY_DATABASE_URI = 'sqlite:///data.sqlite'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-
+    SECRET_KEY = os.urandom(16)
     # 
 
 class DevConfig(BaseConfig):
