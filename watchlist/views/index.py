@@ -46,9 +46,7 @@ def index():
 
         return render_template('index.html', form=form, movies=movies, name=user.name)
 
-
     
-
 
 @bp_index.errorhandler(404)
 def page_not_found(e):
