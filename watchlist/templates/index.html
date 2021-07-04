@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h2><img src="{{ url_for('static', filename='image/扁平头像-boy 04.png') }}" alt="avatar" class="avatar"></h2>
+
+<h2>{{ name }}'s watchlist</h2>
+<p>{{ movies|length }} Titles</p>
+<ul>
+    {% for m in movies %}
+    <li class="movie-list">{{ m.title }} - {{ m.year }}</li>
+    {% endfor %}
+</ul>
+
+
+<h2><img src="{{ url_for('static', filename='image/扁平头像-boy 05.png') }}" alt="avatar" class="torato"></h2>
+
+{% endblock %}
