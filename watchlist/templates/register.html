@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{{ flash_message() }}
+
+<form action="/register/" method="post">
+    <div> {{ form.username.label }} {{ form.username }} {{ form.username.errors[0] }}</div>
+    <div>{{ form.password.label }} {{ form.password }} {{ form.password.errors[0] }}</div>
+    <div>{{ form.checkpassword.label }} {{ form.checkpassword }} {{ form.checkpassword.errors[0] }}</div>
+
+    <button type="submit">注册</button>  <button type="reset">重置</button>
+</form>
+
+{% endblock %}

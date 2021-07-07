@@ -1,4 +1,5 @@
 from watchlist import db
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 user_movie = db.Table(
@@ -12,7 +13,21 @@ class User(db.Model):  # 表名将会是 user（自动生成，小写处理）
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)  # 主键
     name = db.Column(db.String(20))  # 名字
+    _password = db.Column(db.String(16))
+
     movie = db.relationship('Movie', backref='user', secondary=user_movie)      #多对多关系
+
+    @property
+    def password(self):
+        return self._password
+
+    @password.setter
+    def password(self, value):
+        self._password = generate_password_hash(value)
+
+    def check_password(self, user_pw):
+        return check_password_hash(self._password, user_pw)
+
 
 
 class Movie(db.Model):  # 表名将会是 movie

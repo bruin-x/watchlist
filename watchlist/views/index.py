@@ -1,25 +1,8 @@
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash, session
 
 from . import bp_index
 from watchlist import models
 from watchlist import forms
-
-
-name = 'Xiong Renyi'
-
-movies = [
-    {'title': 'My Neighbor Totoro', 'year': '1988'},
-    {'title': 'Dead Poets Society', 'year': '1989'},
-    {'title': 'A Perfect World', 'year': '1993'},
-    {'title': 'Leon', 'year': '1994'},
-    {'title': 'Mahjong', 'year': '1996'},
-    {'title': 'Swallowtail Butterfly', 'year': '1996'},
-    {'title': 'King of Comedy', 'year': '1999'},
-    {'title': 'Devils on the Doorstep', 'year': '1999'},
-    {'title': 'WALL-E', 'year': '2008'},
-    {'title': 'The Pork of Music', 'year': '2012'},
-]
-
 
 
 @bp_index.route('/', methods=['GET', 'POST'])
@@ -54,3 +37,17 @@ def index():
 def page_not_found(e):
     return render_template('404.html'), 404
 
+
+
+@bp_index.before_request
+def is_login():
+    if session.get('username'):
+        return
+    
+    if request.path == '/login/':
+        return
+    
+    if request.path == '/register/':
+        return
+    
+    return redirect(url_for('index.login'))

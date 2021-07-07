@@ -1,0 +1,9 @@
+
+
+<!-- 添加待看电影 -->
+<form action="/" method="post">
+    <label > Title</label>  {{ form.title }} {{ form.title.errors[0] }} <br>
+    <label > Year</label>   {{ form.year }} {{ form.year.errors[0] }} <br>
+     {{ form.user_id }} 
+    <button type="submit">添加</button>
+</form>

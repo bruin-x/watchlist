@@ -3,6 +3,31 @@ from wtforms import validators, Form, widgets
 
 
 
+class Login(Form):
+    username = simple.StringField(
+        label='用户名',
+        widget=widgets.TextInput(),
+        validators=[validators.InputRequired(), validators.Length(max=20, min=1, message='长度超出！')],
+        render_kw={'class': 'username', 'id': 'username'}
+    )
+
+    password = simple.PasswordField(
+        label='密码',
+        widget=widgets.PasswordInput(),
+        validators=[validators.InputRequired(), validators.Length(max=16, min=1, message='长度超出！')],
+        render_kw={'class': 'password', 'id': 'password'}
+    )
+
+
+class Register(Login):
+    checkpassword = simple.PasswordField(
+        label='确认密码',
+        widget=widgets.PasswordInput(),
+        validators=[validators.InputRequired(), validators.Length(max=16, min=1, message='长度超出！'), validators.EqualTo('password', message='密码必须一致！')],
+        render_kw={'class': 'checkpassword', 'id': 'checkpassword'}
+    )
+
+
 class AddMovie(Form):
     title = simple.StringField(
         label='title',
