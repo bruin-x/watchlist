@@ -1,9 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}修改{% endblock %}
+
+{% block icon %}
+<link rel="icon" href="{{ url_for('static', filename='icon/增加.svg') }}">{% endblock %}
+
+{% block content %}
+
+<h2>
+    <img src="{{ url_for('static', filename='image/扁平头像-boy 04.png') }}" alt="avatar" class="avatar"> {{ name }}'s
+    watchlist
+</h2>
 
 
-<!-- 添加待看电影 -->
-<form action="/" method="post">
-    <label > Title</label>  {{ form.title }} {{ form.title.errors[0] }} <br>
-    <label > Year</label>   {{ form.year }} {{ form.year.errors[0] }} <br>
-     {{ form.user_id }} 
-    <button type="submit">添加</button>
-</form>
+<div>{{ movies|length }} Titles </div>
+
+
+<div><!-- 添加待看电影 -->
+    <form action="{{ url_for('edit.add') }}" method="post">
+        <label> Title</label> {{ form.title }} {{ form.title.errors[0] }} 
+        <label> Year</label> {{ form.year }} {{ form.year.errors[0] }} 
+        {{ form.user_id }}
+        <button type="submit">添加</button>
+    </form>
+</div>
+
+
+
+<ul class="movie-list">
+    <ul>
+        {% for m in movies %}
+        <li class="movie-list">{{ m.title }} - {{ m.year }} <a href="{{ url_for('edit.dele', movie_id=m.id) }}">删除</a></li>
+        {% endfor %}
+    </ul>
+</ul>
+
+
+
+
+{% endblock %}

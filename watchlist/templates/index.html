@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+{% block title %}主页{% endblock %}
+
+{% block icon %}<link rel="icon" href="{{ url_for('static', filename='icon/首页.svg') }}">{% endblock %}
 
 {% block content %}
 
@@ -8,7 +11,8 @@
 </h2>
 
 
-<p>{{ movies|length }} Titles</p> <p><a href="#">编辑</a></p>
+{{ movies|length }} Titles     <a href="{{ url_for('edit.edit') }}">编辑</a>
+
 
 <ul class="movie-list">
     <ul>
@@ -17,7 +21,6 @@
         {% endfor %}
     </ul>
 </ul>
-
 
 
 {% endblock %}

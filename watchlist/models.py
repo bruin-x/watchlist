@@ -11,7 +11,7 @@ user_movie = db.Table(
 
 class User(db.Model):  # 表名将会是 user（自动生成，小写处理）
     __tablename__ = 'user'
-    id = db.Column(db.Integer, primary_key=True)  # 主键
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)  # 主键
     name = db.Column(db.String(20))  # 名字
     _password = db.Column(db.String(16))
 
@@ -32,7 +32,7 @@ class User(db.Model):  # 表名将会是 user（自动生成，小写处理）
 
 class Movie(db.Model):  # 表名将会是 movie
     __tablename__ = 'movie'
-    id = db.Column(db.Integer, primary_key=True)  # 主键
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)  # 主键
     title = db.Column(db.String(60))  # 电影标题
     year = db.Column(db.String(4))  # 电影年份
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
